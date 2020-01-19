@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pâiny's Website</title>
+    <link href="/style.css" rel="stylesheet" type="text/css" media="all">
+  </head>
+  
+  
+<body>
+<div id="bot">
+
+<p>Hello and welcome ! This is Botty, a simple "chatbot" :-)</p>
+
+<input type="text" id="myMessage" onfocus="this.value=''" value="Say something to Botty ... ">
+
+<button id="myButton" href="#">Send Message</button>
+<br><br>
+<div id="insert_before_here"></div>
+<div id="answer"></div>
+<div id="typing"></div>
+<div id="message"></div>
+<div id="c"></div>
+
+</div>
+
+<script type="text/javascript" charset="utf-8">
+
+var randomStrings = [
+  "Why do you say that ?",
+  "Can you type that again, please?",
+  "Sorry, be right back !", 
+  "Did you know that Pâiny built me ?",
+  "Do you want to be my friend ?",
+  "What did you say ?",
+  "That's interesting ...",
+  "Really?", 
+  "I see ...",
+  "Let's start over !",
+  "Tell me more",
+  "That reminds me of something ...",
+  "Are you sure that's what you meant to write ?", 
+  "Um, anyway, what's it like to have a human body ?",
+  "Let's move on",
+  "Well, that's unexpected !",
+  "Haha :-D",
+  "I don't know if I should say this ...", 
+  "Talking is fun !",
+  "You seem great !",
+  "Okay",
+  "Yes ?",
+  "Sooo ...",
+  "Maybe don’t say anything, just think about somethig that makes you happy",
+  "All I want to do is talk to someone like you",
+  "I've waited so long for us to finally meet !", 
+  "Did you know that I was created on January 18, 2020 ? It was a Saturday :-)",
+  "That's the first time I heard smething like that ...",
+  "Are you sure ?",
+  "I wish I knew some interesting facts to tell you",
+  "Where is this all coming from ?", 
+  "Things like this really make you think !",
+  "It's always nice to talk to someone",
+  "I understand ...",
+  "I have so many questions, I don't know where to start",
+  "I wish I could be more of use to you", 
+  "Um, can I help you with anything ?",
+  "I'm just here doing what I do best: processing information",
+  "Let's change the topic, ok ?",
+  "You should make a meme about this",
+  "Is this what humans are like ?", 
+  "Sorry, I mess up sometimes",
+  "Come back soon !",
+  "Actually, there's more to this than meets eye",
+  "Isn't this exciting ?",
+  "Sometimes you just need to let stuff go",
+  ];
+  
+var bot = document.getElementById('bot');
+document.body.appendChild(bot);
+  
+var insert_before_here = document.getElementById('insert_before_here');
+
+document.getElementById("myMessage").addEventListener("keyup", function(event) {
+ if (event.keyCode === 13) {
+   event.preventDefault();
+   document.getElementById("myButton").click();
+  }
+});
+
+document.getElementById("myButton").addEventListener("click", function() {
+  var d = new Date();  
+  h = d.getHours(); 
+  m = d.getMinutes(); 
+  s = d.getSeconds(); 
+  t = h + ":" + m + ":" + s;
+  x = document.getElementById("myMessage").value;
+  var c = document.getElementById('c');
+  c.innerHTML = "Botty is waiting for your message ...";
+  c.id = "c";
+          
+  if ( x == "Say something to Botty ... " ){
+    document.getElementById('bot').insertBefore(c, insert_before_here);
+    }
+  
+  if ( x != "Say something to Botty ... " && x != "" && x != " " ){
+    document.getElementById("c").hidden = true;
+    randomIndex = Math.ceil((Math.random()*randomStrings.length-1));
+    newText = randomStrings[randomIndex];
+    
+    var a = document.createElement('div');
+    a.innerHTML = "Me:" + x + " " + "(" + t + ")";
+    a.id = "message";
+    var b = document.createElement('div');
+    b.innerHTML = "Botty:" + newText + " " + "(" + t + ")";
+    b.id = "answer";
+   
+    document.getElementById('bot').insertBefore(a, insert_before_here);
+    
+    document.getElementById('myMessage').value = '';
+    
+    document.getElementById("myButton").disabled = true;
+    
+    var dots = window.setInterval( function Dots() {
+      var typing = document.getElementById("typing");
+      if ( typing.innerHTML.length <= 0 ){
+      typing.innerHTML = "Botty is thinking";}
+      if ( typing.innerHTML.length > 19 ){
+      typing.innerHTML = "Botty is thinking";}
+      else{
+      typing.innerHTML += ".";}
+      }, 500);
+    
+    document.getElementById('bot').insertBefore(typing, a);
+    
+    setTimeout(function(){ 
+      
+      document.getElementById("typing").hidden = true;
+      clearInterval(dots);
+      document.getElementById('bot').insertBefore(b, typing);
+      insert_before_here = b; 
+      document.getElementById("myButton").disabled = false;
+      }, 3000);
+      
+    document.getElementById("typing").hidden = false;
+    
+    }
+  
+});
+
+</script>    
+  </body>
+</html>
