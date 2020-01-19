@@ -93,7 +93,9 @@ document.getElementById("myButton").addEventListener("click", function() {
   h = d.getHours(); 
   m = d.getMinutes(); 
   s = d.getSeconds(); 
+  s2 = s + 3;
   t = h + ":" + m + ":" + s;
+  t2 = h + ":" + m + ":" + s2;
   x = document.getElementById("myMessage").value;
   var c = document.getElementById('c');
   c.innerHTML = "Botty is waiting for your message ...";
@@ -112,7 +114,7 @@ document.getElementById("myButton").addEventListener("click", function() {
     a.innerHTML = "Me:" + x + " " + "(" + t + ")";
     a.id = "message";
     var b = document.createElement('div');
-    b.innerHTML = "Botty:" + newText + " " + "(" + t + ")";
+    b.innerHTML = "Botty:" + newText + " " + "(" + t2 + ")";
     b.id = "answer";
    
     document.getElementById('bot').insertBefore(a, insert_before_here);
